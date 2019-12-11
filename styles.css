@@ -1,0 +1,35 @@
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	width: 60%;
+	font-family: "Montserrat", sans-serif;
+}
+
+.cardContainer {
+	margin: 5px;
+	border: solid;
+}
+.name {
+	font-size: 2.25rem;
+}
+
+.job {
+	font-size: 0.8rem;
+	font-weight: lighter;
+}
+
+.tab {
+	font-size: 0.8rem;
+	border-bottom: 1px solid #0078d7;
+	padding: 3px;
+}
+.cardHeader {
+	display: flex;
+	flex-direction: column;
+	background-color: #dbdbdb;
+	padding: 10px;
+}
+
+.tabsContent {
+	padding: 5px;
+}
