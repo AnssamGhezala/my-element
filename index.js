@@ -12,6 +12,9 @@ class MyElement extends HTMLElement {
               font-size: 2.5rem;
               margin: 10px;
             }
+            label {
+                color: white
+            }
 
             </style>
             <div> 
@@ -19,30 +22,35 @@ class MyElement extends HTMLElement {
             </div>
           `;
 
-		// onClick event listener to change the visibility of the element
+		// onClick event listener to reveal the name of the clicked element
 		this.addEventListener('click', () => {
-			this.isInvisible = !this.isInvisible;
-			var myDiv = shadowRoot.querySelector('div').style;
-			if (this.isInvisible) {
-				myDiv.visibility = 'hidden';
+            this.isClicked = !this.isClicked;
+            
+            // Get the label in the shadow Root. This is the label displaying either "Who's there" or which element
+			var myLabel = shadowRoot.querySelector('label');
+            
+            // If user clicks on the shadow root, update the styling of the element
+            if (this.isClicked) {
+				updateStyle(this);
 			} else {
-				myDiv.visibility = 'visible';
+                // We go back to our initial label text of "Who's there" and white color
+				myLabel.innerHTML = "Who's there?";
+				myLabel.style.color = 'white';
 			}
 		});
 	}
 
-	// isInvisible variable used to put element as visible or not visible
-	isInvisible = false;
+	// isClicked variable used to put element as visible or not visible
+	isClicked = false;
 
 	// Lifecycle method called every time the custom element is appended to the main DOM
 	connectedCallback() {
 		console.log('Custom element added to the page :)');
-		// Function to update style of custom element
-		updateStyle(this);
 	}
 }
 
-// Helper function to update the style of an element. For instance here we update the label's color
+// Helper function to update the style of an element. For instance here we update our label's color and text
+// to the color and text attribute passed to the element
 const updateStyle = (el) => {
 	const shadow = el.shadowRoot;
 	const myLabel = shadow.querySelector('label');
@@ -52,6 +60,7 @@ const updateStyle = (el) => {
 
 customElements.define('my-element', MyElement);
 
+// Get the root of the main dom (to add to it our element)
 const root = document.querySelector('.root');
 
 // Define instance #1 of MyElement named "element1"
